@@ -27,7 +27,7 @@ The patient book allows users to manipulate patient and appointment data in vari
 
 *This section records the enhancements and contributions of `LI XINZE` to the project.*
 
-* *Code Contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=lixinze777
+* *Code Contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=lixinze777[code]]
 
 * *Main feature implemented* : added the *appointment management mode* and the *switching feature between different modes*
 ** What it does: Allows appointment related data to be displayed. Allows users to switch between the patient management
@@ -43,16 +43,14 @@ appointment without breaking the existing functionality.
 
 * *Other contributions*:
 ** Minor enhancements :
-*** Minor enhancement 1: added a `prompt window` that allows the application to acquire additional information from users
+*** Added a `prompt window` that allows the application to acquire additional information from users
 (if needed) during appointment addition. The prompt window is a general feature and hence can be used in other means if
 there will be any further enhancements.
-*** Minor enhancement 2: added a `person browse panel` for `patient management mode` and a `appointment
+*** Added a `person browse panel` for `patient management mode` and a `appointment
 browse panel` for `patient management m to replace the original `display panel`. The patient information and appointment notes can be displayed
 accordingly without accessing the Internet.
-*** Minor enhancement 3: added `select command` which supports the CLI functionality of the product. Select command allows
+*** Added `select command` which supports the CLI functionality of the product. Select command allows
 users to select any patient card or appointment card without actually clicking the card.
-** Project management:
-*** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
 ** Enhancements to existing features:
 *** Modify the title and icon of application.(Pull requests
 https://github.com/CS2103-AY1819S1-T12-2/main/pull/111[#111],
@@ -84,9 +82,6 @@ Switches the application to patient management mode. In this mode, you can view 
 enter a valid command regarding patient in appointment management mode, the application will switch to patient management
 mode automatically.
 
-.Patient Mode
-image::mode_patient.PNG[width="600"]
-
 === Switch to appointment management mode : `mode appointment`
 
 *Format:* `mode appointment`
@@ -97,9 +92,6 @@ appointment management mode automatically.
 
 [NOTE]
 By default, the list panel only displays appointments in the future.
-
-.Appointment Mode
-image::mode_appointment.PNG[width="600"]
 
 === Select a patient : `select patient`
 
@@ -146,7 +138,7 @@ image::select_command_appointment.PNG[width="600"]
 === UI component
 
 .Structure of the UI Component
-image::UiClassDiagram.png[width="800"]
+image::UiClassDiagram.png[width="600"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
@@ -193,10 +185,49 @@ There are three steps involved in the processing of the switch feature:
 Step 1. Event Post: When user types in a `mode command`,the ModeCommand will post a switchToPatientEvent or
 SwitchToAppointmentEvent to the event center.
 
+.Mode Command Code Snippet
+[source,java]
+----
+ @Override
+    public CommandResult execute(AddressBookModel addressBookModel, ScheduleModel scheduleModel,
+                                 DiagnosisModel diagnosisModel, CommandHistory history) throws CommandException {
+        requireNonNull(addressBookModel);
+        requireNonNull(scheduleModel);
+        if (this.cmdType.equals(CMDTYPE_PATIENT)) {
+            EventsCenter.getInstance().post(new SwitchToPatientEvent());
+            return new CommandResult(MESSAGE_PATIENT_SWITCH_SUCCESS);
+        } else if (this.cmdType.equals(CMDTYPE_APPOINTMENT)) {
+            EventsCenter.getInstance().post(new SwitchToAppointmentEvent());
+            return new CommandResult(MESSAGE_SCHEDULE_SWITCH_SUCCESS);
+        } else {
+            throw new CommandException("Unexpected command type: should have been caught in ModeCommandParser.");
+        }
+    }
+----
+
 Step 2. Event Handle: UiManager is registered as an event handler. It subscribes from the events center and call
 relevant method (switchToPatient or switchToAppointment).
 
 Step 3. Handle Switch: Inside the switch methods, the current window will be hided and the other window will be shown.
+
+.UiManager Code Snippet
+[source,java]
+----
+ @Override
+    public void switchToAppointment() {
+        logger.info("Switching to Appointment Mode");
+        try {
+            appointmentMainWindow.show();
+            appointmentMainWindow.setShowing(true);
+            appointmentMainWindow.setNotePanelToDefault();
+            mainWindow.hide();
+            mainWindow.setShowing(false);
+        } catch (Throwable e) {
+            logger.severe(StringUtil.getDetails(e));
+            showFatalErrorDialogAndShutdown("Fatal error during switching", e);
+        }
+    }
+----
 
 [NOTE]
 The implementation allows the window to know whether it is at the showing state. This is mainly to solve the problem
@@ -234,4 +265,48 @@ that is showing. When user requires to switch mode, identifies the current mode 
 already in this mode.
 ** Pros: It can respond more accurately when user wish to switch mode.
 ** Cons: It increases dependency on the code unnecessarily.
+
+=== Mode
+
+. Switching to appointment management mode
+
+.. Test case: `mode appointment` +
+   Expected: Software is switched to appointment management mode. Success message is shown in the display panel.
+   Timestamp in the status bar is not updated.
+.. Test case: `mode damith` +
+   Expected: Software remains at the current mode. Error details are shown in the display panel.
+   Timestamp in the status bar is not updated.
+
+. Switching to patient management mode
+
+.. Test case: `mode patient` +
+   Expected: Software is switched to patient management mode. Success message is shown in the display panel.
+   Timestamp in the status bar is not updated.
+.. Test case: `mode damith` +
+   Expected: Software remains at the current mode. Error details are shown in the display panel.
+   Timestamp in the status bar is not updated.
+
+=== Select
+
+. Selecting a patient（Assume that *only* patient p0 is present in the person list panel）
+
+.. Test case: `select patient p0` +
+   Expected: Patient p0 is selected. Its card lights up with a blue color. The details of patient p0 are shown in the
+   person browse panel. Success message is shown in the display panel. Timestamp in the status bar is not updated.
+.. Test case: `select p0` +
+   Expected: No patient is being selected. Error details are shown in the display panel.
+   Timestamp in the status bar is not updated.
+.. Other incorrect select patient commands to try: `select patient 0`, `select patient p1`, `select patient e0` +
+   Expected: Similar to previous
+
+. Selecting an appointment（Assume that *only* appointment e0 is present in the appointment panel）
+
+.. Test case: `select appointment e0`
+   Expected: Appointment e0 is selected. Its card lights up with a blue color. The note of appointment e0 are shown in
+   the appointment note panel. Success message is shown in the display panel. Timestamp in the status bar is not updated.
+.. Test case: `select e0`
+   Expected: Expected: No appointment is being selected. Error details are shown in the display panel.
+   Timestamp in the status bar is not updated.
+.. Other incorrect select patient commands to try: `select appointment 0`, `select appointment e1`, `select appointment p0`
+   Expected: Similar to previous
 ---

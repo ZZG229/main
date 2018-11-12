@@ -13,11 +13,11 @@ This project portfolio documents `Zhou Zegang`’s contributions to project `Pat
 
 `PatientBook` is an all-in-one convenient desktop application for medical professionals in Singapore.
 It is a `Command Line Interface(CLI)` application in which doctors can type simple commands on keyboard to store and
-manage patients’ data and appointment’ details easily. It can also be used to retrieve information about
-disease, symptoms and drugs.
+manage patients’ data and appointments’ details easily. It can also be used to retrieve information about
+diseases, symptoms and drugs.
 
-The `T12-2` development team consists of five year-two computer science undergraduates from School of Computing,
-`National University of Singapore`.
+The `T12-2` development team of `PatientBook` consists of five year-two computer science undergraduates from School of Computing,
+`National University of Singapore`. [https://github.com/CS2103-AY1819S1-T12-2/main/blob/master/docs/AboutUs.adoc[Team Info]]
 
 `PatientBook` supports various important operations such as finding information about a patient,
 adding an appointment for a patient and predicting a disease from a set of symptoms.
@@ -25,10 +25,12 @@ adding an appointment for a patient and predicting a disease from a set of sympt
 
 == 2. Summary of Contributions
 
+This section provides an overview of `Zhou Zegang`’s contributions to project `PatientBook`.
+
 * *Code contributed*: Code From Dashboard [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=zzg229&sort=displayName&since=2018-09-12&until=2018-11-12&timeframe=day&reverse=false&repoSort=true[Code]]
 
 * *Major enhancement*: added *diagnosis model which supports add disease, find disease, list disease and predict
-disease command*.
+disease commands*
 ** What it does: This feature allows medical professionals to `add` a disease and its related symptoms,
 `find` symptoms of an existing disease,
 `list` all stored diseases and `predict` a disease from a given set of symptoms in PatientBook.
@@ -36,7 +38,7 @@ disease command*.
 and ascertain the accuracy of the diagnosis using `predict` command. Thus, this enhancement will reduce the likelihood
 of medical malpractice to a large extent.
 ** Highlight: This enhancement is totally another separate model from two existing models, namely `patient model` and
-`appointment model`. As a result, it required an in-depth analysis of design and how it can integrate with the other two
+`appointment model`. As a result, it required an in-depth analysis of both design and integration with the other two
 models. The implementation too was challenging as it required changes to existing project structure.
 ** Credit: The `diagnosis model` uses an existing disease-symptom knowledge database
 from `Columbia University`. [http://people.dbmi.columbia.edu/~friedma/Projects/DiseaseSymptomKB/index.html[Database]]
@@ -45,10 +47,10 @@ from `Columbia University`. [http://people.dbmi.columbia.edu/~friedma/Projects/D
 ** Minor enhancement:
 *** designed and added a generic method which converts a list of items to an `alphabetically ordered`
 string message so that it can be clearly displayed in the application.
-*** Resolved CSV file reading for drug utility function. (Pull request: [https://github.com/CS2103-AY1819S1-T12-2/main/pull/184[#184]])
+*** Resolved CSV file reading issue for drug utility function in jar . (Pull request: [https://github.com/CS2103-AY1819S1-T12-2/main/pull/184[#184]])
 ** Project management:
 *** Set up Travis for team project on Travis CI
-*** Assigned issue to teammates (example: [https://github.com/CS2103-AY1819S1-T12-2/main/issues/65[#65]] )
+*** Assigned issues to teammates (example: [https://github.com/CS2103-AY1819S1-T12-2/main/issues/65[#65]] )
 *** Included labels for issue tracker (example: [https://github.com/CS2103-AY1819S1-T12-2/main/labels[Label]])
 ** Documentation:
 *** Updated the AboutUs.page (Pull requests: [https://github.com/CS2103-AY1819S1-T12-2/main/pull/1[#1]][https://github.com/CS2103-AY1819S1-T12-2/main/pull/172[#172]])
@@ -58,6 +60,10 @@ string message so that it can be clearly displayed in the application.
 
 
 == 3. Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
 
 === Add a disease : `add disease`
 
@@ -168,7 +174,6 @@ Returns an error message:
 .Error Message for Empty Symptom Parameter
 image::PredictEmptySymptom.png[width="600"]
 
-
 == 4. Contributions to the Developer Guide
 
 |===
@@ -263,7 +268,6 @@ of diseases that are mapped to a set of symptoms containing the given set.
         return diseases;
     }
 ----
-
 
 ==== Design Considerations
 

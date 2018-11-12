@@ -61,7 +61,7 @@ public class DrugSearch {
         }
 
         if (resultsCache.size() > 0) {
-            results = results.concat("For more information about any result, enter \"moreinfo [INDEX]\"");
+            results = results.concat("For more information about any result, enter \"moreinfo [RESULTNO]\"");
         } else {
             results = "Not found.";
         }

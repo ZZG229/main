@@ -30,7 +30,7 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
+    public void parseInvalidArgsThrowsParseException() {
         assertParseFailure(parser, CMDTYPE_DIAGNOSIS,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
     }

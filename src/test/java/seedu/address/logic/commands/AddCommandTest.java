@@ -256,7 +256,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void parseDisease_noSymptomValue() throws Exception {
+    public void parseDiseaseNoSymptomValue() throws Exception {
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddCommand.EMPTY_SYMPTOM_ERROR);
         StringBuilder sb = new StringBuilder();

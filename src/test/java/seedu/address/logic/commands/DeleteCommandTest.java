@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_INVALID_PERSON_ID;
+import static seedu.address.logic.parser.CmdTypeCliSyntax.CMDTYPE_APPOINTMENT;
 import static seedu.address.logic.parser.CmdTypeCliSyntax.CMDTYPE_PATIENT;
 import static seedu.address.model.AddressBookModel.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -78,8 +80,19 @@ public class DeleteCommandTest {
                         new CommandHistory());
     }
 
+    @Test
+    public void checkEqual() {
+        DeleteCommand deleteCommand = new DeleteCommand(CMDTYPE_PATIENT, "dummy");
+        DeleteCommand deleteCommand1 = new DeleteCommand(CMDTYPE_PATIENT, "dummy");
+        DeleteCommand deleteCommand2 = new DeleteCommand(CMDTYPE_APPOINTMENT, "dummy");
+
+        assertEquals(deleteCommand, deleteCommand1);
+        assertNotEquals(deleteCommand1, deleteCommand2);
+    }
+
     /**
      * makes sure that the deleting is successful
+     *
      * @param addressBookModel address book model
      * @param target target for deletion
      * @throws Exception
@@ -108,8 +121,9 @@ public class DeleteCommandTest {
 
     /**
      * Triggers delete failure
+     *
      * @param addressBookModel address book model
-     * @param target target for deletion
+     * @param target           target for deletion
      * @throws Exception
      */
     private void triggerDeletePatientFailure(AddressBookModel addressBookModel, String target)

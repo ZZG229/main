@@ -77,7 +77,7 @@ enter a valid command regarding patient in appointment management mode, the appl
 mode automatically.
 
 .Patient Mode
-image::mode_patient.PNG[width="600"]
+image::Ui.png[width="600"]
 
 === Switch to appointment management mode : `mode appointment`
 
@@ -436,6 +436,45 @@ image::PredictEmptySymptom.png[width="600"]
 
 // end::diagnosis[]
 
+=== Locate drug  : `find drug`
+
+*Format:* `find drug NAME`
+
+Searches a database of drugs licensed for sale in Singapore, and returns
+basic pharmacological information about all drugs whose names contain the given
+search phrase. Results are displayed in the form of a numbered, scrollable list.
+
+* The search is case-insensitive; e.g. `find drug GLYCOMET`, is  equivalent to `find drug glycomet`.
+* Partial matches will be included as results; e.g. `find drug lyri` will
+return the drug "Lyrica" as one of the results.
+
+Example:
+
+* `find drug panadol` +
+Returns all drugs with names containing "Panadol" as results.
+
+.Result for Command 'find drug panadol'
+image::DrugSearchExample.png[width="600"]
+
+=== Read more about drug  : `moreinfo`
+
+*Format:* `moreinfo [INDEX]`
+
+Displays full pharmacological information about any drug in the list
+of search results that are produced by the `find drug` command.
+
+* Only positive integers are accepted as inputs; eg. `moreinfo 2`
+* `moreinfo` can be used repeatedly to view information about multiple results
+
+Example:
+
+* `moreinfo 3` (immediately after `find drug panadol`)
+
+.Before Command 'moreinfo'
+image::MoreInfoBefore.png[width="600"]
+.After Command 'moreinfo'
+image::MoreInfoAfter.png[width="600"]
+
 === List entered commands : `history`
 
 *Format:* `history`
@@ -459,7 +498,7 @@ Exits the program.
 
 * *Add an appointment* : `add appointment` +
 
-* *Clear All appointments* : `clear appointment` +
+* *Clear all appointments* : `clear appointment` +
 
 * *Delete a patient* : `delete patient` +
 
@@ -485,7 +524,11 @@ Exits the program.
 
 * *Locate patients* : `find patient` +
 
+* *Locate drug* : `find drug` +
+
 * *Predict disease* : `predict` +
+
+* *Read more about drug* : `moreinfo` +
 
 * *Select a patient* : `select patient` +
 

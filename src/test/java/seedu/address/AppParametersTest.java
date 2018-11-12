@@ -31,7 +31,7 @@ public class AppParametersTest {
     }
 
     @Test
-    public void parse_invalidConfigPath_success() {
+    public void parseInvalidConfigPathSuccess() {
         parametersStub.namedParameters.put("config", "a\0");
         expected.setConfigPath(null);
         assertEquals(expected, AppParameters.parse(parametersStub));

@@ -25,7 +25,7 @@ public class EditCommandParserTest {
     private EditCommandParser parser = new EditCommandParser();
 
     @Test
-    public void parse_allArgsPresent_success() {
+    public void parseAllArgsPresentSuccess() {
         // for patient
         assertParseSuccess(parser, CMDTYPE_PATIENT + " " + SAMPLE_PERSONID
                 + " " + TAG_EMPTY,

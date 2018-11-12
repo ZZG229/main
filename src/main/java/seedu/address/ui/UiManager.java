@@ -39,7 +39,6 @@ public class UiManager extends ComponentManager implements Ui {
     private UserPrefs prefs;
     private MainWindow mainWindow;
     private AppointmentMainWindow appointmentMainWindow;
-    private Stage secondaryStage;
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
         this.logic = logic;

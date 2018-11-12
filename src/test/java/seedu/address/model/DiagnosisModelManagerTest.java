@@ -37,6 +37,12 @@ public class DiagnosisModelManagerTest {
     private Symptom confusion = new Symptom("confusion");
 
     @Test
+    public void constructor() {
+        DiagnosisModelManager diagnosisModelManager = new DiagnosisModelManager();
+        assertNotNull(diagnosisModelManager);
+    }
+
+    @Test
     public void hasDisease() {
         diagnosisModelManager.hasDisease(melanoma);
         assertFalse(diagnosisModelManager.hasDisease(autism));

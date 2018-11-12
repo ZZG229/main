@@ -144,8 +144,7 @@ public class ParserUtil {
      */
     public static Symptom parseSymptom(String symptom) throws ParseException {
         requireNonNull(symptom);
-        symptom = symptom.toLowerCase();
-        String trimmedSymptom = symptom.trim();
+        String trimmedSymptom = symptom.toLowerCase().trim();
         return new Symptom(trimmedSymptom);
     }
 

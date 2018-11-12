@@ -27,7 +27,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parseValidArgsReturnsFindCommand() {
         FindCommand expectedFindCommand = new FindCommand(CMDTYPE_PATIENT, "search string");
         assertParseSuccess(parser, CMDTYPE_PATIENT + "     search string", expectedFindCommand);
     }
@@ -37,16 +37,4 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "containsnumbers123", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 FindCommand.MESSAGE_USAGE));
     }
-    /*
-    @Test
-    public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new MatchPersonPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
-
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
-    }
-    */
 }

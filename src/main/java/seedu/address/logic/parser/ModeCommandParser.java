@@ -20,12 +20,11 @@ public class ModeCommandParser implements Parser<ModeCommand> {
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public ModeCommand parse(String args) throws ParseException {
-
-        args = args.trim();
-        if (!args.equals(CMDTYPE_PATIENT) && !args.equals(CMDTYPE_APPOINTMENT)) {
+        String trimmed = args.trim();
+        if (!trimmed.equals(CMDTYPE_PATIENT) && !trimmed.equals(CMDTYPE_APPOINTMENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModeCommand.MESSAGE_USAGE));
         }
 
-        return new ModeCommand(args);
+        return new ModeCommand(trimmed);
     }
 }

@@ -56,7 +56,7 @@ public class ArgumentTokenizerTest {
     } */
 
     @Test
-    public void tokenize_oneArgument() {
+    public void tokenizeOneArgument() {
         // Preamble present
         String argsString = "  Some preamble string p/ Argument value ";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
