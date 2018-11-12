@@ -49,7 +49,7 @@ Responsibilities: DevOps, Integration, Testing
 
 === Li Xinze
 image::lixinze777.png[width="150", align="left"]
-{empty}[http://github.com/lixinze777[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/lixinze777[github]] [<<lixinze777#, portfolio>>]
 
 Role: Developer +
 Responsibilities: In Charge of UI

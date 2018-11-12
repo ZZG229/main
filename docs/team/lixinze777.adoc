@@ -20,13 +20,16 @@ manage patient and appointment data. In addition, it assists doctor to make diag
 symptoms, diseases and drugs. The user interacts with it using a `Command Line Interface` (CLI), which means users can
 enter all the commands by typing. It also has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
 
-There is a list of main features. TODO
+The patient book allows users to manipulate patient and appointment data in various means such as `add`, `delete`,
+`select`, `edit`, `find` and `list`. Certain commands like `list` and `find` applies to diseases and drugs as well.
 
 == 2. Summary of contributions
 
 *This section records the enhancements and contributions of `LI XINZE` to the project.*
 
-* *Major enhancement* : added the *appointment management mode* and the *switching feature between different modes*
+* *Code Contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=lixinze777
+
+* *Main feature implemented* : added the *appointment management mode* and the *switching feature between different modes*
 ** What it does: Allows appointment related data to be displayed. Allows users to switch between the patient management
 mode and the appointment management mode. Helps the users to switch the mode automatically when they key in the command
 in the wrong mode.
@@ -38,21 +41,16 @@ It required an in-depth understanding of the work flow of UI and how it can be l
 The auto-switching implementation was challenging as it required enhancement on each command related to patient or
 appointment without breaking the existing functionality.
 
-* *Minor enhancement 1*: added a `prompt window` that allows the application to acquire additional information from users
+* *Other contributions*:
+** Minor enhancements :
+*** Minor enhancement 1: added a `prompt window` that allows the application to acquire additional information from users
 (if needed) during appointment addition. The prompt window is a general feature and hence can be used in other means if
 there will be any further enhancements.
-
-* *Minor enhancement 2*: added a `person browse panel` for `patient management mode` and a `appointment
+*** Minor enhancement 2: added a `person browse panel` for `patient management mode` and a `appointment
 browse panel` for `patient management m to replace the original `display panel`. The patient information and appointment notes can be displayed
 accordingly without accessing the Internet.
-
-* *Minor enhancement 3*: added `select command` which supports the CLI functionality of the product. Select command allows
+*** Minor enhancement 3: added `select command` which supports the CLI functionality of the product. Select command allows
 users to select any patient card or appointment card without actually clicking the card.
-
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-
-* *Other contributions*:
-
 ** Project management:
 *** Managed releases `v1.3` - `v1.4` (2 releases) on GitHub
 ** Enhancements to existing features:
@@ -61,8 +59,6 @@ https://github.com/CS2103-AY1819S1-T12-2/main/pull/111[#111],
 https://github.com/CS2103-AY1819S1-T12-2/main/pull/146[#146])
 *** Wrote additional tests for existing features (Pull requests
 https://github.com/CS2103-AY1819S1-T12-2/main/pull/158[#158])
-** Documentation:
-*** TODO: https://github.com[#14]
 ** Community:
 *** PRs reviewed (with non-trivial review comments):
 https://github.com/CS2103-AY1819S1-T12-2/main/pull/168[#168],
@@ -72,11 +68,6 @@ https://github.com/CS2103-AY1819S1-T12-2/main/pull/80[#80]
 *** Contributed to forum discussions (examples:  https://github.com/nus-cs2103-AY1819S1/forum/issues/106[1],
 https://github.com/nus-cs2103-AY1819S1/forum/issues/115[2])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103-AY1819S1-F10-3/main/issues/248[1])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
 
 == 3. Contributions to the User Guide
 
