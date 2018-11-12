@@ -39,7 +39,8 @@ It also aids doctors making diagnosis by providing information on `symptoms`, `d
 
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
-* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
+* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5], http://opencsv.sourceforge.net/[OpenCSV]
 * Original source code was adopted from https://github.com/se-edu/ (addressbook-level4)
+* A database of drugs licensed for sale in Singapore was used under the Singapore Open Data License.
 
 == Licence : link:LICENSE[MIT]

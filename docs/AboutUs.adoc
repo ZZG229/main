@@ -5,15 +5,14 @@
 :stylesDir: stylesheets
 
 PatientBook was developed by the https://github.com/CS2103-AY1819S1-T12-2.html[CS2103-AY1819S1-T12-2] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
+ +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
 === Zhang Lizhi
 image::kumuwu.png[width="150", align="left"]
-{empty}[https://github.com/kumuwu[github]] [<<zhanglizhi#, portfolio>>]
+{empty}[https://github.com/kumuwu[github]] [<<kumuwu#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: Scheduling and Tracking

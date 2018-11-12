@@ -194,8 +194,7 @@ Creates a new appointment and places it in the schedule. If necessary, switches 
 [NOTE]
 Unlike other commands, this command does not require any prefixing.
 
-For `TIME` parameter, user may choose to use natural expressions to indicate the time or period where the appointment is to be scheduled. The list of natural expressions for `TIME`
-which are accepted by the program include:
+For `TIME` parameter, user may choose to use natural expressions to indicate the time or period where the appointment is to be scheduled. The list of natural expressions for `TIME` accepted by the programme include:
 
 * `tomorrow` or `tmr`
 * `the day after tomorrow` or `the day after tmr`
@@ -219,8 +218,8 @@ After the initial input is processed by the programme, user may encounter a maxi
 
 * A prompt window where user is required to choose the correct patient to schedule for, if the name provided in the initial input can be matched to multiple patients in the record. The definition of a successful match is the same as that of the command `find patient`, as explained above. `Patient_ID` of the intended patient is to be entered.
 * A prompt window where user is required to provide a specific time slot for the appointment, from a list of available time periods, in `DD/MM/YYYY hh:mm - hh:mm` format.
-* A prompt window where user may choose to provide any additional notes for the appointment.
 * A prompt window where user may choose to provide any tags for the appointment.
+* A prompt window where user may choose to provide any additional notes for the appointment.
 
 Example:
 
@@ -228,27 +227,27 @@ Command entered: `add appointment for Xinze tomorrow`
 // we require explicit numbering because the numbering system stops searching for further indices past
 // a fenced code block.
 
-1) There are multiple individuals named `Xinze` in the patient record, the program will request for a specific patient ID, in a prompt window similar to the following:
+1) There are multiple patients named `Xinze` in the patient record. Programme requests for a specific patient ID, in a prompt window similar to the following:
 
 .Prompt Window for Patient ID
 image::promptName.png[width="600"]
 
-2) Once `Xinze` is matched to a unique patient in the patient record, the program will display a list of available time periods during `tomorrow`, based on the current time at which the command is executed, in another prompt window similar to the following:
+2) Once `Xinze` is matched to a unique patient in the patient record, programme displays a list of available time periods during `tomorrow`, based on the current time at which the command is executed, in another prompt window similar to the following:
 
 .Prompt Window for Time Slot
 image::promptTimeSlot.png[width="600"]
 
-3) User further input: `31/10/2018 9:30 - 10:30`. Program proceeds to request for tags to be attached to the appointment, in another prompt window similar to the following:
+3) User further inputs: `31/10/2018 9:30 - 10:30`. Programme proceeds to request for tags to be attached to the appointment, in another prompt window similar to the following:
 
 .Prompt Window for Tags
 image::promptTag.png[width="600"]
 
-4) User may choose to provide or not provide any tags. In this case, the user does not wish to attach any tags. After that, program proceeds to request for additional notes for the appointment, in another prompt window similar to the following:
+4) User may choose to provide or not provide any tags. In this case, the user does not wish to attach any tags. After that, programme proceeds to request for additional notes for the appointment, in another prompt window similar to the following:
 
 .Prompt Window for Additional Notes
 image::promptNotes.png[width="600"]
 
-5) User may choose to provide or not provide any additional notes. In this case, the user does not wish to add any additional notes. Upon completion, program creates the appointment as indicated in the schedule, and displays the following message to the user:
+5) User may choose to provide or not provide any additional notes. In this case, the user does not wish to add any additional notes. Upon completion, programme creates the appointment and displays the following message to the user:
 
 
 ```
@@ -484,11 +483,11 @@ Lists all commands that you have entered in reverse chronological order.
 [TIP]
 Tip: Pressing up and down arrows will display the previous and next input respectively in the command box.
 
-=== Exit the program : `exit`
+=== Exit the programme : `exit`
 
 *Format:* `exit`
 
-Exits the program.
+Exits the programme.
 
 == Command Summary
 
@@ -508,7 +507,7 @@ Exits the program.
 
 * *Edit patient information* : `edit patient` +
 
-* *Exit the program* : `exit` +
+* *Exit the programme* : `exit` +
 
 * *List all appointments* : `list appointment` +
 

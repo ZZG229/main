@@ -9,18 +9,18 @@
 
 == 1. Overview
 
-This Project Portfolio is used to document the role and contribution of `LI XINZE` to this project, `Patient Book`.
+This Project Portfolio is used to document the role and contribution of `Li Xinze` to this project, Patient Book.
 
-The project `Patient Book` is a student project done by 5 NUS Year 2 Computer Science students. I am one member of
+Patient Book is a student project done by 5 NUS Year 2 Computer Science students. I am one member of
 this project team, `T12-2` of AY2018-19 Semester 1. In this team, I am in charge of the User Interface (UI), including
 the design, the function and the connection between UI and other components.
 
-The project `Patient Book` is a desktop application for doctors. It is an all-in-one software that helps doctors to
+Patient Book is a desktop application for doctors. It is an all-in-one software that helps doctors to
 manage patient and appointment data. In addition, it assists doctor to make diagnosis by providing information of
 symptoms, diseases and drugs. The user interacts with it using a `Command Line Interface` (CLI), which means users can
 enter all the commands by typing. It also has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
 
-The patient book allows users to manipulate patient and appointment data in various means such as `add`, `delete`,
+Patient book allows users to manipulate patient and appointment data in various means such as `add`, `delete`,
 `select`, `edit`, `find` and `list`. Certain commands like `list` and `find` applies to diseases and drugs as well.
 
 == 2. Summary of contributions
@@ -208,7 +208,7 @@ SwitchToAppointmentEvent to the event center.
 Step 2. Event Handle: UiManager is registered as an event handler. It subscribes from the events center and call
 relevant method (switchToPatient or switchToAppointment).
 
-Step 3. Handle Switch: Inside the switch methods, the current window will be hided and the other window will be shown.
+Step 3. Switch Handle: Inside the switch methods, the current window will be hided and the other window will be shown.
 
 .UiManager Code Snippet
 [source,java]
@@ -301,12 +301,13 @@ already in this mode.
 
 . Selecting an appointment（Assume that *only* appointment e0 is present in the appointment panel）
 
-.. Test case: `select appointment e0`
+.. Test case: `select appointment e0` +
    Expected: Appointment e0 is selected. Its card lights up with a blue color. The note of appointment e0 are shown in
    the appointment note panel. Success message is shown in the display panel. Timestamp in the status bar is not updated.
-.. Test case: `select e0`
+.. Test case: `select e0` +
    Expected: Expected: No appointment is being selected. Error details are shown in the display panel.
    Timestamp in the status bar is not updated.
-.. Other incorrect select patient commands to try: `select appointment 0`, `select appointment e1`, `select appointment p0`
+.. Other incorrect select patient commands to try: `select appointment 0`, `select appointment e1`, `select appointment p0` +
    Expected: Similar to previous
+
 ---

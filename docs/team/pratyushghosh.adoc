@@ -1,0 +1,282 @@
+= Pratyush Ghosh - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: PatientBook
+
+---
+
+== Overview
+
+PatientBook is an all-in-one convenience utility for medical professionals in Singapore. It is used to store and manage patient data as well as appointment schedules. It can also be used to retrieve information about disease, symptoms and drugs.
+PatientBook uses simple and intuitive “commands” to receive instructions from the user – this makes it speedy, lightweight and easy to pick up.
+
+== Summary of contributions
+
+* *Major enhancement*: Added *a Drug Database Search.*
+** What it does: Shows the user a list of all Singapore-licensed medicines whose names partially or fully match
+   the entered keyword, including detailed pharmacological information.
+** Justification: This feature is immensely convenient for medical professionals, who regularly face situations
+   where:
+   *** They are unfamiliar with the particular brand name of a medicine their patient
+       is taking, and need to check the active ingredient.
+   *** They need to check the different strengths (250mg, 625ml, etc.)
+       and formulations (capsule, syrup, etc.) of a medication that are available.
+   *** Need to know the classification of a drug (over-the-counter, prescription-only, etc.) so
+       they can determine if a prescription or particular pharmacy is needed.
+
+** Highlights:
+*** The search feature takes into account keywords that might be too generic, e.g. "tablet",
+and warns the user if such a keyword is used that it may generate too many results.
+*** The search features takes readability into account, by first displaying a list of compact information
+about each drug, and giving the user the option of seeing more information about any particular
+result.
+
+* *Minor enhancement*:
+** Refactored parts of the `find` command to make it readable and consistent,
+and modified several error messages for clarity.
+** Wrote tests to cover all code related to Drug Search.
+
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=pratyushghosh[Code]]
+
+* *Other contributions*:
+
+** Project management:
+*** Created team repository and forked the necessary codebase.
+*** Created team in repository, and assigned read/write privileges.
+** Documentation:
+*** Wrote the Introduction section of the User Guide, and documented the entire Drug Search
+Feature.
+*** Documented the entire Drug Search feature in the Developer Guide.
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/CS2103-AY1819S1-W14-3/main/issues/163[1], https://github.com/CS2103-AY1819S1-W14-3/main/issues/166)[2])
+** Tools:
+*** Integrated a third party library (OpenCSV) to the project: https://github.com/CS2103-AY1819S1-T12-2/main/pull/43)[OpenCSV].
+
+== Contributions to the User Guide
+
+|===
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|===
+
+=== Introduction
+
+PatientBook is an all-in-one convenience utility for medical professionals in Singapore. It is used to store and manage patient data as well as appointment schedules. It can also be used to retrieve information about disease, symptoms and drugs.
+PatientBook uses simple and intuitive “commands” to receive instructions from the user – this makes it speedy, lightweight and easy to pick up. Refer to Section 2, “Quick Start” to begin using PatientBook.
+
+---
+
+=== Locate drug  : `find drug`
+
+*Format:* `find drug NAME`
+
+Searches a database of drugs licensed for sale in Singapore, and returns
+basic pharmacological information about all drugs whose names contain the given
+search phrase. Results are displayed in the form of a numbered, scrollable list.
+
+* The search is case-insensitive; e.g. `find drug GLYCOMET`, is  equivalent to `find drug glycomet`.
+* Partial matches will be included as results; e.g. `find drug lyri` will
+return the drug "Lyrica" as one of the results.
+
+Example:
+
+* `find drug panadol` +
+Returns all drugs with names containing "Panadol" as results.
+
+.Result for Command 'find drug panadol'
+image::DrugSearchExample.png[width="600"]
+
+=== Read more about drug  : `moreinfo`
+
+*Format:* `moreinfo [INDEX]`
+
+Displays full pharmacological information about any drug in the list
+of search results that are produced by the `find drug` command.
+
+* Only positive integers are accepted as inputs; eg. `moreinfo 2`
+* `moreinfo` can be used repeatedly to view information about multiple results
+
+Example:
+
+* `moreinfo 3` (immediately after `find drug panadol`)
+
+.Before Command 'moreinfo'
+image::MoreInfoBefore.png[width="600"]
+.After Command 'moreinfo'
+image::MoreInfoAfter.png[width="600"]
+
+
+
+== Contributions to the Developer Guide
+
+|===
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|===
+
+=== Drug Database Search
+
+This feature allows the user to view pharmacological information about medical drugs currently licensed for sale
+in Singapore.
+
+==== Current Implementation
+
+The execution of a drug database search via the `find drug` command takes place in the following manner:
+
+. The user enters the command `find drug [drugname]`, which is parsed by `FindCommandParser`
+to ensure that it has a single argument only - `[drugname]` - and that the argument contains
+only uppercase and lowercase alphabets.
+
+. If errors are found in the input, a `ParseException` is thrown and the user sees an error message
+containing the proper command syntax.
+If the input is valid, a `FindCommand` is generated with a trimmed, lowercase version of
+`[drugname]` as its search string,
+and `DRUG` as its command type.
+
+. `FindCommand` is executed through its `execute()` method, and
+calls the static `DrugSearch.find()` method with the search string as an argument.
+
+. The `DrugSearch.find()` method ensures that the search string does _not_ match any of a
+list of generic words like "syrup" or "tablet" which are not suitable search phrases,
+as they would generate hundreds of results. If the check fails, a specific error string
+is returned, whereupon the `FindCommand` object throws a command exception, notifying the user
+that their search string is too generic.
+
+. If the check passes, the `DrugSearch.find()` method creates a `DrugCsvUtil` object as a local
+variable, passing in the search string as an input to its constructor. The `DrugCsvUtil` object now corresponds
+to that search string only.
+
+. The `DrugCsvUtil` contains a `nextMatchingResult` method which reads a static drug database stored in "datasetForDrugs.csv" (formatted in UTF-8)
+from top to bottom, and each time it is called, it returns the _next_ matching result from
+the database in the form of a `String[]`. Once there are no matching results, it begins to return
+`null`.
+
+. The DrugSearch.find() method adds the matching results returned by the `DrugCsvUtil` to a static
+cache, one after the other. Once it receives `null` as a return value,
+it formats just the _Name, Classification and Active Ingredient(s)_ of the drug results in the cache
+into a `String` of search results and returns it to `FindCommand`, which
+displays them. The full information can be displayed using the `moreinfo` command (discussed later).
+If the cache is empty (i.e. there were no matches in the database), `DrugSearch.find()` returns a specific error String instead,
+whereupon `FindCommand` throws a `CommandException`, and the user sees an error message
+indicating that no results were found.
+
+. The cache is _not_ cleared at the end of the search: instead, it is cleared when a _new_search
+is initiated, in order to accommodate the `moreinfo` command.
+
+. When the results are displayed to the user in the form of a numbered list, they have the option
+of entering the command `moreinfo [RESULTNO]` to view more information about any of the results.
+
+. The argument of the command is parsed by `MoreInfoCommandParser` to ensure that it is numeric,
+not less than or equal to zero, and is less than 10,000.
+If the parse fails, a `ParseException` is thrown and the user sees the
+error message that corresponds to the problem with their input.
+
+. If the parse is successful, a `MoreInfoCommand` object is created, which executes through its
+`execute()` method, and calls `DrugSearch.moreInfo()` with the index number as its argument.
+
+. `DrugSearch.moreInfo()` checks that the index is in the cache of results from the most recent
+search. If the cache is empty, this means that the user has not carried out a single drug
+search yet, or that the most recent drug search turned up no results. In these cases,
+a specific error string is returned, and `MoreInfoCommand` throws a `CommandException`, and
+the user sees the appropriate error message.
+
+. If the index is contained in the cache, the full information about the corresponding drug
+(seven categories of information) is formatted into a `String` result and returned, which
+is then displayed.
+
+_Note_: The drug database is updated as of September, 2018.
+
+The feature has been implemented using the OpenCSV library, which offers tools for manipulating
+.csv (Comma Separated Values) files.
+
+==== Design Considerations
+
+===== Aspect : How to format search results
+
+* **Alternative 1 (current choice):** Displays only partial information about each drug in the
+initial search results.
+** Pros: Prevents search results from being several pages long, and verbose.
+** Cons: Requires a separate command to be implemented for full information about
+any particular result to be displayed
+* **Alternative 2:** Display all seven categories of information about each drug in the initial
+results.
+** Pros: Easy to implement.
+** Cons: Results will be very long, and contain information that the user may not actually need.
+
+===== Aspect : How to read the drug database
+
+* **Alternative 1 (current choice):** Create a separate I/O utility class (`DrugCsvUtil`) to read
+directly from the file each time a search is carried out
+** Pros: Runs fast, and is modular.
+** Cons: Filepath-related code can break if the working directory changes upon packaging into jar.
+* **Alternative 2:** Read contents of file onto memory in the form of a `HashMap<>`
+** Pros: File only has to be read once, and the contents can be easy manipulated since they
+are in the form of mapped pairs stored as a class variable.
+** Cons: Causes the program to become very slow, as 2MB of data must be read into memory.
+
+===== Aspect : How `moreinfo` works
+
+* **Alternative 1 (current choice):** `moreinfo` can be used repeatedly, but only on one result
+at a time.
+** Pros: Easy to implement.
+** Cons: May cause user to have to recall a long list of index numbers if they want to
+see more information about multiple results.
+* **Alternative 2:** `moreinfo` accepts multiple indices in a single run of the command.
+** Pros: Will create efficiency for the user.
+** Cons: Difficult to implement, particularly if a mix of valid and invalid indices are entered
+as arguments.
+
+---
+
+=== Find
+. finding drugs
+
+.. Test case: `find drug Lyrica` +
+   Expected: This displays a list of search results, consisting of the
+   Name, Classification and Active Ingredient(s) of all matching drugs.
+.. Test case: `find drug syrup`
+   Expected: This displays the error message
+   'Your search keyword is too generic. It will lead to hundreds of results.
+   Try a more specific keyword instead.'
+.. Test case: `find drug somedrug123`
+   Expected: This displays the error message 'Invalid command format!' followed
+   by instructions on how to use the `find` command.
+.. Test case: `find drug dfvwlub`
+   Expected: This displays the error message 'No results found. Try again
+   with a different query.'
+
+=== Seeing More Information About Drugs
+
+. Seeing more information about a search result
+
+_Note:_ The following test case will hold true only if the most recent drug searched
+produced at least one result. In this example,
+`find drug Glycomet` has been assumed to be the most recent drug search.
+
+.. Test case: `moreinfo 1`
+   Expected: This displays additional information about the first search result.
+.. Test case: `moreinfo 3`
+   Expected: This displays the error message 'This result is not in the list'.
+
+_Note:_ The following two test cases will hold true regardless of what command
+was entered immediately prior.
+
+.. Test case: `moreinfo -1`
+   Expected: This displays the error message 'Invalid command format! followed
+   by instructions on how to use the `moreinfo` command.
+.. Test case: `moreinfo 10000`
+   Expected: This displays the error message 'Invalid command format! followed
+   by instructions on how to use the `moreinfo` command.
+
+_Note:_ The following test case will hold true either if no drug search has been carried
+out since the program was started, or if the most recent drug search produced no results
+or was unsuccessful. In this example, `find drug Niacin` has been assumed to be
+the most recent drug search.
+
+.. Test case: `moreinfo 1`
+   Expected: This displays the error message 'Please carry out a search
+   using "find drug [drugname]" first.'.
+
+== PROJECT: PatientBook
+
+---
